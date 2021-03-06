@@ -1,0 +1,101 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>文章列表</title>
+  <script src="node_modules/detect-process/dist/detectProcess.js"></script>
+  <script>
+    const PROCESS_CONTEXT = detectProcess.getName();
+    // Only electron menu - if env is electron
+    if (PROCESS_CONTEXT === 'electron') {
+      window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.js');
+      window.WebMessage = require('./scripts/html-web-message.js');
+    } 
+    // else {
+    //   document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"><\/script>');
+    //   document.write('<script src="scripts/web-message.js"><\/script>');
+    // }
+  </script>
+  <style>
+    .uk-active {
+      border: solid 1px lightgrey;
+    }
+
+    .uk-pagination>li {
+      padding: 0 10px 0 !important;
+    }
+
+    .uk-pagination>li>a {
+      color: green !important;
+      font-weight: 900;
+      text-decoration: underline;
+    }
+
+    .tag-normal {
+      text-decoration: underline;
+      color: blue;
+      cursor: pointer;
+    }
+  </style>
+  <link rel="stylesheet" href="resources/uikit/css/uikit.min.css" />
+  <script src="resources/uikit/js/uikit.min.js"></script>
+  <script src="resources/uikit/js/uikit-icons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="app" class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+    <!-- <button @click="onTest">button</button> -->
+    <div v-if="!loading" class="uk-grid" data-uk-grid-margin="">
+      <div style="width: 75%;" class="uk-width-medium-3-4 uk-row-first">
+        <article v-for="item in articles" v-key="item._id" class="uk-article">
+          <h2>{{item.title}}</h2>
+          <p>更新日期：{{item.updatedAt}}，作者：{{item.author}}</p>
+          <div v-html="item.content"></div>
+          <div style="margin-top:20px;">
+            <dl style="display:inline-flex;margin-bottom: 0;">
+              <dt>标签：</dt>
+              <dd style="margin-right:10px;" v-for="tag in item.tags" v-key="tag">{{tag}}</dd>
+            </dl>
+            <dl style="display:inline-flex;margin-top: 0;">
+              <dt>操作：</dt>
+              <dd><a href="#" style="width: 80px;height:30px;" @click="editThisArticle(item)">编辑</a></dd>
+            </dl>
+          </div>
+        </article>
+
+        <ul class="uk-pagination">
+          <li style="margin-right: 20px;">共{{totalSize}}条 &nbsp;&nbsp;分页:</li>
+          <template v-for="n in totalPage">
+            <li v-if="n == pageIndex" class="uk-active"><span>{{n}}</span></li>
+            <li v-else><a @click="onClickPageNavigationBtn(n)" href="javascript:void(0)">{{n}}</a></li>
+          </template>
+        </ul>
+
+      </div>
+
+      <div style="width: 25%;" class="uk-width-medium-1-4">
+        <div class="uk-panel">
+          <p>
+            <button style="width: 60px;height: 30px;" onclick="javascript:location.reload();">刷新</button>
+          </p>
+          <h3 class="uk-panel-title">标签</h3>
+          <ul class="uk-list uk-list-line">
+            <template v-for="item in tags" v-key="item">
+              <li v-if="item == currentTag" style="color:grey">{{item}}</li>
+              <li v-else @click="onClickTag(item)" class="tag-normal">{{item}}</li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      Loading..
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <script src="scripts/listjs.js"></script>
+
+</body>
+
+</html>

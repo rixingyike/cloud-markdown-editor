@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    <script src="https://imgcache.qq.com/qcloud/tcbjs/1.3.5/tcb.js"></script>
+    <script>
+      const app = tcb.init({
+        env: 'default-98491d'  // 此处填入你的环境ID
+        // env: 'weapp-ebfl5'
+      });
+      app.auth().signInAnonymously().then(() => {
+        alert('登录云开发成功')
+      });
+    </script>
+  </head>
+  <body>
+    Hello Cloudbase!
+  </body>
+</html>

@@ -1,0 +1,81 @@
+{
+  "name": "multimediacloudeditor",
+  "productName": "MultiMediaCloudEditor",
+  "version": "2.1.8",
+  "electronVersion": "8.3.2",
+  "description": "",
+  "keywords": [
+    "markdown",
+    "editor",
+    "electron",
+    "commonmark",
+    "markdown-it",
+    "uikit"
+  ],
+  "main": "background.js",
+  "bin": {
+    "electron-markdown-editor": "./bin/electron-markdown-editor"
+  },
+  "build": {
+    "appId": "com.yishulun.editor",
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    }
+  },
+  "scripts": {
+    "package": "electron-packager ./ --out ./output --platform darwin --electron-version 8.3.2 --overwrite --icon=./resources/icon.ico",
+    "dist": "electron-builder --win --x64",
+    "dev": "electron .",
+    "clean:dist": "rm -rf ./dist",
+    "build:osx": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --overwrite --prune --asar --arch=all --platform=darwin --icon=./resources/icon.icns --electronVersion=8.3.2 --app-version=$npm_package_version",
+    "build:win": "electron-packager . $npm_package_productName --out=dist --arch=all --platform=win32 --ignore='^/dist$' --prune --asar --overwrite --icon=./resources/icon.ico --electronVersion=8.3.2 --app-version=$npm_package_version",
+    "build:linux": "electron-packager . $npm_package_productName --out=dist --arch=x64 --platform=linux --ignore='^/dist$' --prune --asar --overwrite --icon=./resources/icon.png --electronVersion=8.3.2 --app-version=$npm_package_version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diversen/electron-markdown-editor.git"
+  },
+  "author": "Dennis Iversen",
+  "license": "MIT",
+  "dependencies": {
+    "@cloudbase/node-sdk": "^2.3.3",
+    "codemirror": "^5.30.0",
+    "detect-process": "^1.0.4",
+    "highlightjs": "^8.7.0",
+    "is-defined-eval": "^1.0.3",
+    "is-electron": "^2.1.0",
+    "isbinaryfile": "^3.0.2",
+    "jquery": "^3.4.1",
+    "jsdom": "^15.2.1",
+    "logger2x": "0.0.2",
+    "markdown-it-embed-mathjax-highlight": "^1.0.5",
+    "markdown-table-template": "^1.0.1",
+    "marked": "^1.1.1",
+    "mathjax": "^2.7.2",
+    "picgo": "^1.4.8",
+    "plist": "^3.0.1",
+    "relative": "^3.0.2",
+    "tcb-admin-node": "^1.23.0",
+    "uikit": "^2.27.4",
+    "urlencode": "^1.1.0",
+    "electron-debug": "^1.4.0",
+    "electron-packager": "^15.1.0",
+    "electron-reload": "^1.5.0",
+    "electron-reloader": "^1.0.1",
+    "electron-store": "^6.0.0",
+    "electron-window": "^0.8.1"
+  },
+  "devDependencies": {
+    "electron": "8.3.2",
+    "electron-builder": "^22.9.1"
+  }
+}
