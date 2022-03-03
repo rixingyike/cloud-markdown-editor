@@ -35,6 +35,6 @@ win32metadata parameters for Windows targets.
 以Mac为例，配置文件真实位置在：/Users/${user}/ElectronMarkdownEditor/BlogHelper.json 
 
 
-有问题欢迎关注作者公众号「程序员LIYI」交流
+有问题欢迎关注作者公众号「网络榨知机」交流
 
 ![](https://gitee.com/rxyk/weapp-practice/raw/master/slogon.png)
